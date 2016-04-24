@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.contentListView) ListView mContentListView;
     @Bind(R.id.fab) FloatingActionButton fab;
-    private String[] headlines = new String[] {"Uber Settles", "Apple Services in China", "F.B.I. Director Says 1.3 Mil For iPhone Hack", "Alphabet Earnings Disappoint", "Microsoft Cloud Biz Falls Short"};
+    private String[] headlines = new String[] {"What Chatbots Say About Us", "Uber Settles", "Apple Services in China", "F.B.I. Director Says 1.3 Mil For iPhone Hack", "Alphabet Earnings Disappoint", "Microsoft Cloud Biz Falls Short"};
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
