@@ -22,7 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     @Bind(R.id.contentListView) ListView mContentListView;
     @Bind(R.id.fab) FloatingActionButton fab;
     private String[] headlines = new String[] {"Uber Settles", "Apple Services in China", "F.B.I. Director Says 1.3 Mil For iPhone Hack", "Alphabet Earnings Disappoint", "Microsoft Cloud Biz Falls Short"};
