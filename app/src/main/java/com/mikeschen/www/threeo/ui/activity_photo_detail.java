@@ -3,6 +3,8 @@ package com.mikeschen.www.threeo.ui;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.mikeschen.www.threeo.R;
+
 public class activity_photo_detail extends Activity {
 
     @Override

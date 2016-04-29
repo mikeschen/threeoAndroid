@@ -3,11 +3,15 @@ package com.mikeschen.www.threeo.models;
 /**
  * Created by reviveit on 4/29/16.
  */
+
+
 public class Photo {
     private int mFarm;
     private String mServer;
     private String mId;
     private String mSecret;
+
+    public Photo() {}
 
     public Photo(int farm, String server, String id, String secret) {
         this.mFarm = farm;
@@ -28,4 +32,5 @@ public class Photo {
     public String getSecret() {
         return mSecret;
     }
+
 }
