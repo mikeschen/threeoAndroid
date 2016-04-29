@@ -24,5 +24,4 @@ public class ScribeActivity extends Activity {
         mHeadlineTextView.setText("Headline: " + headline);
         mStoryTextView.setText("Story: " + story);
     }
-
 }
