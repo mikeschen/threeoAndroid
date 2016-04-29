@@ -9,5 +9,6 @@
         android:layout_height="100dp"
         android:id="@+id/photoImageView"
         android:src="@drawable/cat"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:layout_margin="5dp"/>
 </LinearLayout>

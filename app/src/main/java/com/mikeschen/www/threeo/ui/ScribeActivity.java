@@ -3,6 +3,8 @@ package com.mikeschen.www.threeo.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mikeschen.www.threeo.R;
+import com.mikeschen.www.threeo.adapters.PhotoListAdapter;
 import com.mikeschen.www.threeo.models.Photo;
 import com.mikeschen.www.threeo.services.FlickrService;
 
@@ -23,11 +26,13 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ScribeActivity extends Activity {
-    public ArrayList<Photo> mPhotos = new ArrayList<>();
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
-    @Bind(R.id.gridView) GridView mGridView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     public static final String TAG = ScribeActivity.class.getSimpleName();
+    private PhotoListAdapter mAdapter;
+
+    public ArrayList<Photo> mPhotos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +64,12 @@ public class ScribeActivity extends Activity {
             ScribeActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String[] photoFarms = new String[mPhotos.size()];
-                    for (int i = 0; i < photoFarms.length; i++) {
-                        photoFarms[i] = "https://farm" + mPhotos.get(i).getFarm() + ".staticflickr.com/" + mPhotos.get(i).getServer() + "/" + mPhotos.get(i).getId() + "_" + mPhotos.get(i).getSecret() + "_m.jpg";
-                    }
-                    ArrayAdapter adapter = new ArrayAdapter(ScribeActivity.this,
-                            android.R.layout.simple_list_item_1, photoFarms);
-                    mGridView.setAdapter(adapter);
+                    mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
+                    mRecyclerView.setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager =
+                            new LinearLayoutManager(ScribeActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
                 }
             });
         }
