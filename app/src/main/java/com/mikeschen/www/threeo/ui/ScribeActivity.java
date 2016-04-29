@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class ScribeActivity extends Activity {
     public ArrayList<Photo> mPhotos = new ArrayList<>();
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
-    @Bind(R.id.listView) ListView mListView;
+    @Bind(R.id.gridView) GridView mGridView;
     public static final String TAG = ScribeActivity.class.getSimpleName();
 
     @Override
@@ -60,11 +61,11 @@ public class ScribeActivity extends Activity {
                 public void run() {
                     String[] photoFarms = new String[mPhotos.size()];
                     for (int i = 0; i < photoFarms.length; i++) {
-                        photoFarms[i] = mPhotos.get(i).getFarm() + "";
+                        photoFarms[i] = "https://farm" + mPhotos.get(i).getFarm() + ".staticflickr.com/" + mPhotos.get(i).getServer() + "/" + mPhotos.get(i).getId() + "_" + mPhotos.get(i).getSecret() + "_m.jpg";
                     }
                     ArrayAdapter adapter = new ArrayAdapter(ScribeActivity.this,
                             android.R.layout.simple_list_item_1, photoFarms);
-                    mListView.setAdapter(adapter);
+                    mGridView.setAdapter(adapter);
                 }
             });
         }
