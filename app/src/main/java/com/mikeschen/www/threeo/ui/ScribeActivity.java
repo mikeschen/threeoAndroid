@@ -1,9 +1,11 @@
-package com.mikeschen.www.threeo;
+package com.mikeschen.www.threeo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.widget.TextView;
+
+import com.mikeschen.www.threeo.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

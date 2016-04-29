@@ -1,23 +1,16 @@
-package com.mikeschen.www.threeo;
+package com.mikeschen.www.threeo.ui;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
+import com.mikeschen.www.threeo.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
