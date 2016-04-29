@@ -10,5 +10,5 @@
         android:id="@+id/photoImageView"
         android:src="@drawable/cat"
         android:scaleType="centerCrop"
-        android:layout_margin="5dp"/>
+        android:layout_margin="3dp"/>
 </LinearLayout>

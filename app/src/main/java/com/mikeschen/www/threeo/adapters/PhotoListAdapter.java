@@ -1,6 +1,7 @@
 package com.mikeschen.www.threeo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,10 @@ import android.widget.ImageView;
 
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.Photo;
+import com.mikeschen.www.threeo.ui.PhotoDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -54,6 +58,16 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    int itemPosition = getLayoutPosition();
+                    Intent intent = new Intent(mContext, PhotoDetailActivity.class);
+                    intent.putExtra("position", itemPosition + "");
+                    intent.putExtra("photos", Parcels.wrap(mPhotos));
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void bindPhoto(Photo photo) {

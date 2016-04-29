@@ -1,10 +1,12 @@
 package com.mikeschen.www.threeo.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by reviveit on 4/29/16.
  */
 
-
+@Parcel
 public class Photo {
     private int mFarm;
     private String mServer;
