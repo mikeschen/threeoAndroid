@@ -19,10 +19,9 @@ public class FlickrService {
         OkHttpClient client = new OkHttpClient.Builder().build();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.FLICKR_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.FLICKR_QUERY_PARAMETER, "flickr.photos.search");
-        urlBuilder.addQueryParameter(Constants.FLICKR_CONSUMER_KEY, "api_key");
+        urlBuilder.addQueryParameter("api_key", Constants.FLICKR_CONSUMER_KEY);
         urlBuilder.addQueryParameter("format", "json");
         urlBuilder.addQueryParameter("nojsoncallback", "1");
-        urlBuilder.addQueryParameter(Constants.FLICKR_CONSUMER_KEY, "api_key");
         urlBuilder.addQueryParameter("text", headline);
         String url = urlBuilder.build().toString();
         Log.d("string url", url);
