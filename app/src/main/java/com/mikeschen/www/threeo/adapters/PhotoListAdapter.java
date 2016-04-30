@@ -26,6 +26,8 @@ import butterknife.ButterKnife;
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.PhotoViewHolder> {
     private ArrayList<Photo> mPhotos = new ArrayList<>();
     private Context mContext;
+    private static final int MAX_WIDTH = 150;
+    private static final int MAX_HEIGHT = 150;
 
     public PhotoListAdapter(Context context, ArrayList<Photo> photos) {
         mContext = context;
@@ -71,7 +73,11 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
         }
 
         public void bindPhoto(Photo photo) {
-            Picasso.with(mContext).load("https://farm" + photo.getFarm() + ".staticflickr.com/" + photo.getServer() + "/" + photo.getId() + "_" + photo.getSecret() + "_m.jpg").into(mPhotoImageView);
+            Picasso.with(mContext)
+                    .load("https://farm" + photo.getFarm() + ".staticflickr.com/" + photo.getServer() + "/" + photo.getId() + "_" + photo.getSecret() + "_m.jpg")
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
+                    .into(mPhotoImageView);
         }
     }
 }

@@ -34,5 +34,7 @@ public class Photo {
     public String getSecret() {
         return mSecret;
     }
-
+    public String getWebsite() {
+        return "https://www.flickr.com/photos/" + mId;
+    }
 }
