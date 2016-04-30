@@ -26,7 +26,6 @@
         <activity
             android:name=".ui.ScribeActivity"
             android:label="@string/title_activity_scribe" />
-        <activity android:name=".ui.PhotoDetailActivity" />
+        <activity android:name=".ui.PhotoDetailActivity"/>
     </application>
-
 </manifest>

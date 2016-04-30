@@ -14,7 +14,6 @@
         android:layout_height="30dp"
         android:text="Headline"
         android:id="@+id/headlineTextView"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textStyle="bold"
@@ -37,6 +36,5 @@
         android:layout_below="@+id/storyTextView"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"/>
-
 
 </RelativeLayout>
