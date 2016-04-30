@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="Image"
                 android:id="@+id/photoNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -58,7 +58,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View on Flickr"
+                    android:text="View Photographer On Flickr"
                     android:id="@+id/websiteTextView"
                     android:drawableLeft="@drawable/download"
                     android:drawablePadding="4dp"

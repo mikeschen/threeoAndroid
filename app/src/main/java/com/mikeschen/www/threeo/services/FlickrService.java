@@ -57,8 +57,9 @@ public class FlickrService {
                     String server = imageJSON.getString("server");
                     String id = imageJSON.getString("id");
                     String secret = imageJSON.getString("secret");
-                    Log.d("secret", secret);
-                    Photo photo = new Photo(farm, server, id, secret);
+                    String owner = imageJSON.getString("owner");
+                    String title = imageJSON.getString("title");
+                    Photo photo = new Photo(farm, server, id, secret, owner, title);
                     photos.add(photo);
                 }
             }

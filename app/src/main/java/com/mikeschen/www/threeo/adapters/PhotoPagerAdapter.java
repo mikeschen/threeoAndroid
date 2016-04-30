@@ -32,6 +32,6 @@ public class PhotoPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mPhotos.get(position).getId();
+        return mPhotos.get(position).getTitle();
     }
 }

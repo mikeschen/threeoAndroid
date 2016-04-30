@@ -1,5 +1,7 @@
 package com.mikeschen.www.threeo.models;
 
+import android.util.Log;
+
 import org.parceler.Parcel;
 
 /**
@@ -12,14 +14,18 @@ public class Photo {
     private String mServer;
     private String mId;
     private String mSecret;
+    private String mOwner;
+    private String mTitle;
 
     public Photo() {}
 
-    public Photo(int farm, String server, String id, String secret) {
+    public Photo(int farm, String server, String id, String secret, String owner, String title) {
         this.mFarm = farm;
         this.mServer = server;
         this.mId = id;
         this.mSecret = secret;
+        this.mOwner = owner;
+        this.mTitle = title;
     }
 
     public int getFarm() {
@@ -35,6 +41,10 @@ public class Photo {
         return mSecret;
     }
     public String getWebsite() {
-        return "https://www.flickr.com/photos/" + mId;
+        Log.d("userWeb", "https://www.flickr.com/photos/" + mOwner);
+        return "https://www.flickr.com/photos/" + mOwner;
+    }
+    public String getTitle() {
+        return mTitle;
     }
 }
