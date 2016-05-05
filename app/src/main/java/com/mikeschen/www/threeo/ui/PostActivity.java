@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.firebase.client.Firebase;
 import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import butterknife.Bind;
@@ -22,8 +24,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.editStoryText) EditText mEditStoryText;
     @Bind(R.id.submitButton) Button mSubmitButton;
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+//    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_post);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mEditor = mSharedPreferences.edit();
         mSubmitButton.setOnClickListener(this);
     }
 
@@ -42,9 +44,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.submitButton:
                 String headline = mEditHeadlineText.getText().toString();
                 String story = mEditStoryText.getText().toString();
-                addToSharedPreferences(headline);
-                addToSharedPreferences(story);
+                saveHeadlineToFirebase(headline, story);
                 Intent intent = new Intent(PostActivity.this, ScribeActivity.class);
+                intent.putExtra("headline", headline);
+                intent.putExtra("story", story);
                 startActivity(intent);
                 break;
             default:
@@ -52,8 +55,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.HEADLINE_KEY, location).apply();
-        mEditor.putString(Constants.STORY_KEY, location).apply();
+    public void saveHeadlineToFirebase(String headline, String story) {
+        Firebase headlineRef = new Firebase(Constants.FIREBASE_URL_HEADLINE);
+        headlineRef.setValue(headline);
+        Firebase storyRef = new Firebase(Constants.FIREBASE_URL_STORY);
+        storyRef.setValue(story);
     }
 }

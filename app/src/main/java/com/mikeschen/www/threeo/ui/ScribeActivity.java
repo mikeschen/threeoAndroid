@@ -31,9 +31,9 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ScribeActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private String mRecentHeadline;
-    private String mRecentStory;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentHeadline;
+//    private String mRecentStory;
 
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
@@ -56,11 +56,11 @@ public class ScribeActivity extends AppCompatActivity {
         mStoryTextView.setText("Story: " + story);
         getPhotos(headline);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentHeadline = mSharedPreferences.getString(Constants.HEADLINE_KEY, null);
-        mRecentStory = mSharedPreferences.getString(Constants.STORY_KEY, null);
-        Log.d("Shared Pref headline", mRecentHeadline);
-        Log.d("Shared Pref story", mRecentStory);
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentHeadline = mSharedPreferences.getString(Constants.HEADLINE_KEY, null);
+//        mRecentStory = mSharedPreferences.getString(Constants.STORY_KEY, null);
+//        Log.d("Shared Pref headline", mRecentHeadline);
+//        Log.d("Shared Pref story", mRecentStory);
     }
 
     private void getPhotos(String headline) {
