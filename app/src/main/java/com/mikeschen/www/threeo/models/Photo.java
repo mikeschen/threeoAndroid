@@ -10,41 +10,47 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Photo {
-    private int mFarm;
-    private String mServer;
-    private String mId;
-    private String mSecret;
-    private String mOwner;
-    private String mTitle;
+    private String headline;
+    private String story;
+    private int farm;
+    private String server;
+    private String id;
+    private String secret;
+    private String owner;
+    private String title;
 
     public Photo() {}
 
-    public Photo(int farm, String server, String id, String secret, String owner, String title) {
-        this.mFarm = farm;
-        this.mServer = server;
-        this.mId = id;
-        this.mSecret = secret;
-        this.mOwner = owner;
-        this.mTitle = title;
+    public Photo(String headline, int farm, String server, String id, String secret, String owner, String title) {
+        this.headline = headline;
+//        this.story = story;
+        this.farm = farm;
+        this.server = server;
+        this.id = id;
+        this.secret = secret;
+        this.owner = owner;
+        this.title = title;
     }
 
+    public String getHeadline() { return headline; }
+    public String getStory() { return story; }
     public int getFarm() {
-        return mFarm;
+        return farm;
     }
     public String getServer() {
-        return mServer;
+        return server;
     }
     public String getId() {
-        return mId;
+        return id;
     }
     public String getSecret() {
-        return mSecret;
+        return secret;
     }
     public String getWebsite() {
-        Log.d("userWeb", "https://www.flickr.com/photos/" + mOwner);
-        return "https://www.flickr.com/photos/" + mOwner;
+        Log.d("userWeb", "https://www.flickr.com/photos/" + owner);
+        return "https://www.flickr.com/photos/" + owner;
     }
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 }

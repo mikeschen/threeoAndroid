@@ -16,4 +16,6 @@ public class Constants {
     public static final String FIREBASE_URL_HEADLINE = FIREBASE_URL + "/" + FIREBASE_HEADLINE;
     public static final String FIREBASE_STORY = "story";
     public static final String FIREBASE_URL_STORY = FIREBASE_URL + "/" + FIREBASE_STORY;
+    public static final String FIREBASE_POSTS = "posts";
+    public static final String FIREBASE_URL_POSTS = FIREBASE_URL + "/" + FIREBASE_POSTS;
 }

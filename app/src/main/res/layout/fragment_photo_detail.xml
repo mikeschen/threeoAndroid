@@ -73,8 +73,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Photo"
-                android:id="@+id/savePhotoButton"
+                android:text="Save Post"
+                android:id="@+id/savePostButton"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorAccent"
                 android:textColor="@color/colorTextIcons"

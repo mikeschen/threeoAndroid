@@ -8,9 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.Photo;
 import com.squareup.picasso.Picasso;
@@ -26,6 +30,7 @@ import butterknife.ButterKnife;
 public class PhotoDetailFragment extends Fragment implements View.OnClickListener {
     @Bind(R.id.photoMainImageView) ImageView mImageLabel;
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
+    @Bind(R.id.savePostButton) Button mSavePostButton;
 
     private Photo mPhoto;
 
@@ -48,7 +53,7 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photo_detail, container, false);
         ButterKnife.bind(this, view);
-
+        mSavePostButton.setOnClickListener(this);
         Picasso.with(view.getContext()).load("https://farm" + mPhoto.getFarm() + ".staticflickr.com/" + mPhoto.getServer() + "/" + mPhoto.getId() + "_" + mPhoto.getSecret() + "_n.jpg").into(mImageLabel);
         mWebsiteLabel.setOnClickListener(this);
         return view;
@@ -59,6 +64,11 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
             Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mPhoto.getWebsite()));
             startActivity(webIntent);
+          }
+          if(v == mSavePostButton) {
+              Firebase ref = new Firebase(Constants.FIREBASE_URL_POSTS);
+              ref.push().setValue(mPhoto);
+              Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
           }
       }
 }

@@ -35,6 +35,8 @@ public class ScribeActivity extends AppCompatActivity {
 //    private String mRecentHeadline;
 //    private String mRecentStory;
 
+
+
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
