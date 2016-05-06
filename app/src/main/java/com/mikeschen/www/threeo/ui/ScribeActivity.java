@@ -31,11 +31,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ScribeActivity extends AppCompatActivity {
-//    private SharedPreferences mSharedPreferences;
-//    private String mRecentHeadline;
-//    private String mRecentStory;
-
-
 
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
@@ -56,40 +51,34 @@ public class ScribeActivity extends AppCompatActivity {
         String story = intent.getStringExtra("story");
         mHeadlineTextView.setText("Headline: " + headline);
         mStoryTextView.setText("Story: " + story);
-        getPhotos(headline);
-
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mRecentHeadline = mSharedPreferences.getString(Constants.HEADLINE_KEY, null);
-//        mRecentStory = mSharedPreferences.getString(Constants.STORY_KEY, null);
-//        Log.d("Shared Pref headline", mRecentHeadline);
-//        Log.d("Shared Pref story", mRecentStory);
+        getPhotos(headline, story);
     }
 
-    private void getPhotos(String headline) {
+    private void getPhotos(String headline, String story) {
         final FlickrService flickrService = new FlickrService();
 
-        FlickrService.findPhotos(headline, new Callback() {
-        @Override
-        public void onFailure (Call call, IOException e){
-            e.printStackTrace();
-        }
+        FlickrService.findPhotos(headline, story, new Callback() {
+            @Override
+            public void onFailure (Call call, IOException e){
+                e.printStackTrace();
+            }
 
-        @Override
-        public void onResponse (Call call, Response response) {
-            mPhotos = flickrService.processResults(response);
+            @Override
+            public void onResponse (Call call, Response response) {
+                mPhotos = flickrService.processResults(response);
 
-            ScribeActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
-                    mRecyclerView.setAdapter(mAdapter);
-                    RecyclerView.LayoutManager layoutManager =
-                            new LinearLayoutManager(ScribeActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
-                }
-            });
-        }
+                ScribeActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager =
+                                new LinearLayoutManager(ScribeActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+                    }
+                });
+            }
         });
     }
 }

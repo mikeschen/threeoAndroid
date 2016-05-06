@@ -9,8 +9,6 @@ public class Constants {
     public static final String FETCH_RECENTS_METHOD = "flickr.photos.getRecent";
     public static final String SEARCH_METHOD =  "flickr.photos.search";
     public static final String FLICKR_QUERY_PARAMETER = "method";
-//    public static final String HEADLINE_KEY = "headline";
-//    public static final String STORY_KEY = "story";
     public static final String FIREBASE_URL = BuildConfig.FIREBASE_ROOT_URL;
     public static final String FIREBASE_HEADLINE = "headline";
     public static final String FIREBASE_URL_HEADLINE = FIREBASE_URL + "/" + FIREBASE_HEADLINE;

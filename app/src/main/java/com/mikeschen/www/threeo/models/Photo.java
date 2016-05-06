@@ -21,9 +21,9 @@ public class Photo {
 
     public Photo() {}
 
-    public Photo(String headline, int farm, String server, String id, String secret, String owner, String title) {
+    public Photo(String headline, String story, int farm, String server, String id, String secret, String owner, String title) {
         this.headline = headline;
-//        this.story = story;
+        this.story = story;
         this.farm = farm;
         this.server = server;
         this.id = id;

@@ -24,9 +24,11 @@ import okhttp3.Response;
  */
 public class FlickrService {
     private static String mHeadline;
+    private static String mStory;
 
-    public static void findPhotos(String headline, Callback callback) {
+    public static void findPhotos(String headline, String story, Callback callback) {
         mHeadline = headline;
+        mStory = story;
         String CONSUMER_KEY = Constants.FLICKR_CONSUMER_KEY;
         OkHttpClient client = new OkHttpClient.Builder().build();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.FLICKR_BASE_URL).newBuilder();
@@ -61,7 +63,7 @@ public class FlickrService {
                     String secret = imageJSON.getString("secret");
                     String owner = imageJSON.getString("owner");
                     String title = imageJSON.getString("title");
-                    Photo photo = new Photo(mHeadline,farm, server, id, secret, owner, title);
+                    Photo photo = new Photo(mHeadline, mStory, farm, server, id, secret, owner, title);
                     photos.add(photo);
                 }
             }
@@ -72,5 +74,4 @@ public class FlickrService {
         }
         return photos;
     }
-
 }
