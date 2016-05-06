@@ -1,6 +1,11 @@
 package com.mikeschen.www.threeo.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.app.Activity;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.adapters.PhotoListAdapter;
 import com.mikeschen.www.threeo.models.Photo;
@@ -25,7 +30,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ScribeActivity extends Activity {
+public class ScribeActivity extends AppCompatActivity {
+
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -45,34 +51,34 @@ public class ScribeActivity extends Activity {
         String story = intent.getStringExtra("story");
         mHeadlineTextView.setText("Headline: " + headline);
         mStoryTextView.setText("Story: " + story);
-        getPhotos(headline);
+        getPhotos(headline, story);
     }
 
-    private void getPhotos(String headline) {
+    private void getPhotos(String headline, String story) {
         final FlickrService flickrService = new FlickrService();
 
-        FlickrService.findPhotos(headline, new Callback() {
-        @Override
-        public void onFailure (Call call, IOException e){
-            e.printStackTrace();
-        }
+        FlickrService.findPhotos(headline, story, new Callback() {
+            @Override
+            public void onFailure (Call call, IOException e){
+                e.printStackTrace();
+            }
 
-        @Override
-        public void onResponse (Call call, Response response) {
-            mPhotos = flickrService.processResults(response);
+            @Override
+            public void onResponse (Call call, Response response) {
+                mPhotos = flickrService.processResults(response);
 
-            ScribeActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
-                    mRecyclerView.setAdapter(mAdapter);
-                    RecyclerView.LayoutManager layoutManager =
-                            new LinearLayoutManager(ScribeActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
-                }
-            });
-        }
+                ScribeActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager =
+                                new LinearLayoutManager(ScribeActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+                    }
+                });
+            }
         });
     }
 }
