@@ -14,7 +14,8 @@ import com.mikeschen.www.threeo.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+//Friday SavedRestaurantListActivity goes into main
+//use activity_scribe.xml for activity
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.contentListView) ListView mContentListView;
     @Bind(R.id.fab) FloatingActionButton fab;
