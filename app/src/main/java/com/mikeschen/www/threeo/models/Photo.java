@@ -2,6 +2,8 @@ package com.mikeschen.www.threeo.models;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.parceler.Parcel;
 
 /**
@@ -9,6 +11,7 @@ import org.parceler.Parcel;
  */
 
 @Parcel
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Photo {
     private String headline;
     private String story;

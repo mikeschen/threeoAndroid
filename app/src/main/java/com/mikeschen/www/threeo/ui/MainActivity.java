@@ -4,41 +4,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
+import com.mikeschen.www.threeo.adapters.FirebasePostListAdapter;
+import com.mikeschen.www.threeo.models.Photo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 //Friday SavedRestaurantListActivity goes into main
 //use activity_scribe.xml for activity
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.contentListView) ListView mContentListView;
     @Bind(R.id.fab) FloatingActionButton fab;
-    private String[] headlines = new String[] {"What Chatbots Say About Us", "Uber Settles", "Apple Services in China", "F.B.I. Director Says 1.3 Mil For iPhone Hack", "Alphabet Earnings Disappoint", "Microsoft Cloud Biz Falls Short"};
     public static final String TAG = MainActivity.class.getSimpleName();
+    private Query mQuery;
+    private Firebase mFirebasePostsRef;
+    private FirebasePostListAdapter mAdapter;
+
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.main_logo);
         toolbar.setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        mFirebasePostsRef = new Firebase(Constants.FIREBASE_URL_POSTS);
+
+        setUpFirebaseQuery();
+        setUpRecyclerView();
+
 //        fab.setOnClickListener(this);
 
 //        setContentView(R.layout.activity_post);
 //        mContentListView = (ListView) findViewById(R.id.contentListView);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, headlines);
-        mContentListView.setAdapter(adapter);
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -91,5 +107,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void setUpFirebaseQuery() {
+        String location = mFirebasePostsRef.toString();
+        Log.d("location", location);
+        mQuery = new Firebase(location);
+    }
+
+    private void setUpRecyclerView() {
+        mAdapter = new FirebasePostListAdapter(mQuery, Photo.class);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

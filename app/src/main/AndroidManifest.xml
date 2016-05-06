@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mikeschen.www.threeo">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,6 +27,8 @@
         <activity
             android:name=".ui.ScribeActivity"
             android:label="@string/title_activity_scribe" />
-        <activity android:name=".ui.PhotoDetailActivity"/>
+        <activity android:name=".ui.PhotoDetailActivity" />
+        <activity android:name=".ui.SavedPostListActivity"></activity>
     </application>
+
 </manifest>

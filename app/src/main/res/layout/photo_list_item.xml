@@ -12,3 +12,5 @@
         android:scaleType="centerCrop"
         android:layout_margin="3dp"/>
 </LinearLayout>
+
+<!--make post_list_item-->
