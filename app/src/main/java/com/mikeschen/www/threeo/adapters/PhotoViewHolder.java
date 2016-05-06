@@ -2,9 +2,11 @@ package com.mikeschen.www.threeo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.Photo;
@@ -19,9 +21,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PhotoViewHolder extends RecyclerView.ViewHolder {
-    private static final int MAX_WIDTH = 150;
-    private static final int MAX_HEIGHT = 150;
+    private static final int MAX_WIDTH = 125;
+    private static final int MAX_HEIGHT = 125;
     @Bind(R.id.photoImageView) ImageView mPhotoImageView;
+    @Bind(R.id.headlineDetailTextView) TextView mHeadlineDetailTextView;
+    @Bind(R.id.storyDetailTextView) TextView mStoryDetailTextView;
     private Context mContext;
     private ArrayList<Photo> mPhotos = new ArrayList<>();
 
@@ -48,6 +52,8 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
                 .into(mPhotoImageView);
+        mHeadlineDetailTextView.setText(photo.getHeadline());
+        mStoryDetailTextView.setText(photo.getStory());
     }
 }
 
