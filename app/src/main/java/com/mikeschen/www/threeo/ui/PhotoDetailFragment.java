@@ -68,7 +68,10 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
           if(v == mSavePostButton) {
               Firebase ref = new Firebase(Constants.FIREBASE_URL_POSTS);
               ref.push().setValue(mPhoto);
-              Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+              Toast.makeText(getContext(), "Post Saved", Toast.LENGTH_SHORT).show();
+              Intent intent = new Intent();
+              intent.setClass(getActivity(), MainActivity.class);
+              getActivity().startActivity(intent);
           }
       }
 }
