@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.fab) FloatingActionButton fab;
     public static final String TAG = MainActivity.class.getSimpleName();
     private Query mQuery;
+    private Firebase mFirebaseRef;
     private Firebase mFirebasePostsRef;
     private FirebasePostListAdapter mAdapter;
 
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.main_logo);
         toolbar.setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
         mFirebasePostsRef = new Firebase(Constants.FIREBASE_URL_POSTS);
 
         setUpFirebaseQuery();
@@ -79,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -91,9 +94,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.action_logout:
+                logout();
+                return true;
+            case R.id.action_settings:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
         // Handle action bar item clicks here. The action bar will
@@ -108,6 +115,19 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    protected void logout() {
+        mFirebaseRef.unauth();
+        takeUserToLoginScreenOnUnAuth();
+    }
+
+    private void takeUserToLoginScreenOnUnAuth() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void setUpFirebaseQuery() {
         String location = mFirebasePostsRef.toString();
         Log.d("location", location);
