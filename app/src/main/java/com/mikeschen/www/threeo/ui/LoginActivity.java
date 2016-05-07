@@ -24,6 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    @Bind(R.id.textView4) TextView mTextView4;
     @Bind(R.id.passwordLoginButton) Button mPasswordLoginButton;
     @Bind(R.id.registerTextView) TextView mRegisterTextView;
     @Bind(R.id.emailEditText) EditText mEmailEditText;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mSharedPreferencesEditor = mSharedPreferences.edit();
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "Imperial.ttf");
+        mTextView4.setTypeface(custom_font);
         mEmailEditText.setTypeface(custom_font);
         mPasswordEditText.setTypeface(custom_font);
         mPasswordLoginButton.setOnClickListener(this);

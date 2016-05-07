@@ -22,6 +22,7 @@ import com.mikeschen.www.threeo.adapters.PhotoListAdapter;
 import com.mikeschen.www.threeo.models.Photo;
 import com.mikeschen.www.threeo.services.FlickrService;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -79,8 +80,7 @@ public class ScribeActivity extends AppCompatActivity {
                         mAuthProgressDialog.dismiss();
                         mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(ScribeActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ScribeActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }

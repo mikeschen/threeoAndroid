@@ -15,7 +15,7 @@
             android:text="Sign up"
             android:id="@+id/textView4"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="32sp"
             android:textColor="@color/colorAccent"
             android:gravity="center"
             android:layout_alignParentLeft="true"
@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:paddingTop="55dp"
             android:paddingBottom="55dp"
-            android:background="@color/colorTextIcons"/>
+            android:background="@color/colorGray"/>
 
         <LinearLayout
             android:orientation="vertical"

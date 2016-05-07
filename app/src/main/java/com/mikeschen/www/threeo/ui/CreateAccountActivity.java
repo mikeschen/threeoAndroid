@@ -21,14 +21,16 @@ import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.User;
 
+import org.w3c.dom.Text;
+
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.createUserButton)
-    Button mCreateUserButton;
+    @Bind(R.id.textView4) TextView mTextView4;
+    @Bind(R.id.createUserButton) Button mCreateUserButton;
     @Bind(R.id.nameEditText) EditText mNameEditText;
     @Bind(R.id.emailEditText) EditText mEmailEditText;
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
@@ -44,12 +46,14 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_create_account);
         ButterKnife.bind(this);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "Imperial.ttf");
+        mTextView4.setTypeface(custom_font);
         mNameEditText.setTypeface(custom_font);
         mEmailEditText.setTypeface(custom_font);
         mPasswordEditText.setTypeface(custom_font);
         mConfirmPasswordEditText.setTypeface(custom_font);
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
         mCreateUserButton.setOnClickListener(this);
+        mLoginTextView.setOnClickListener(this);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedPreferencesEditor = mSharedPreferences.edit();
     }
@@ -57,6 +61,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         if (view == mCreateUserButton) {
             createNewUser();
+        }
+        if (view == mLoginTextView) {
+            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
     public void createNewUser() {
