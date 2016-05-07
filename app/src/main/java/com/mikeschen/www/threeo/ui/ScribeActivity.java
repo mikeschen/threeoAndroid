@@ -1,5 +1,6 @@
 package com.mikeschen.www.threeo.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ScribeActivity extends AppCompatActivity {
-
+    private ProgressDialog mAuthProgressDialog;
     @Bind(R.id.headlineTextView) TextView mHeadlineTextView;
     @Bind(R.id.storyTextView) TextView mStoryTextView;
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -52,12 +53,17 @@ public class ScribeActivity extends AppCompatActivity {
         mHeadlineTextView.setText("Headline: " + headline);
         mStoryTextView.setText("Story: " + story);
         getPhotos(headline, story);
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Searching Flickr...");
+        mAuthProgressDialog.setCancelable(false);
+        mAuthProgressDialog.show();
     }
 
     private void getPhotos(String headline, String story) {
         final FlickrService flickrService = new FlickrService();
-
         FlickrService.findPhotos(headline, story, new Callback() {
+
             @Override
             public void onFailure (Call call, IOException e){
                 e.printStackTrace();
@@ -70,6 +76,7 @@ public class ScribeActivity extends AppCompatActivity {
                 ScribeActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mAuthProgressDialog.dismiss();
                         mAdapter = new PhotoListAdapter(getApplicationContext(), mPhotos);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
