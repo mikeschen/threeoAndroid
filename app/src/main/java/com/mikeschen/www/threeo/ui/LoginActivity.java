@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
     }
+
     public void loginWithPassword() {
         final String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
@@ -84,7 +85,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String userUid = authData.getUid();
 
                     String userInfo = authData.toString();
-                    Log.d("Log", "Currently logged in: " + userInfo);
 
                     mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

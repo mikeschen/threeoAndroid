@@ -19,9 +19,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by reviveit on 4/29/16.
- */
 public class FlickrService {
     private static String mHeadline;
     private static String mStory;
@@ -38,11 +35,9 @@ public class FlickrService {
         urlBuilder.addQueryParameter("nojsoncallback", "1");
         urlBuilder.addQueryParameter("text", headline);
         String url = urlBuilder.build().toString();
-        Log.d("string url", url);
         Request request= new Request.Builder()
                 .url(url)
                 .build();
-
         Call call = client.newCall(request);
         call.enqueue(callback);
     }

@@ -9,9 +9,6 @@ import com.mikeschen.www.threeo.ui.PhotoDetailFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by reviveit on 4/29/16.
- */
 public class PhotoPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Photo> mPhotos;
 

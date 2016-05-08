@@ -6,10 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.parceler.Parcel;
 
-/**
- * Created by reviveit on 4/29/16.
- */
-
 @Parcel
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Photo {

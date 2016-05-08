@@ -39,7 +39,6 @@ public class ScribeActivity extends AppCompatActivity {
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     public static final String TAG = ScribeActivity.class.getSimpleName();
     private PhotoListAdapter mAdapter;
-
     public ArrayList<Photo> mPhotos = new ArrayList<>();
 
     @Override

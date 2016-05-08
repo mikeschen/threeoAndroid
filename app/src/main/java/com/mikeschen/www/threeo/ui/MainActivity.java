@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_search, menu);
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -130,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpFirebaseQuery() {
         String location = mFirebasePostsRef.toString();
-        Log.d("location", location);
         mQuery = new Firebase(location);
     }
 
