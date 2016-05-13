@@ -8,13 +8,11 @@
         android:icon="@drawable/bugle"
         android:title=""
         app:showAsAction="ifRoom"/>
-
     <item
-        android:id="@+id/action_settings"
-        android:color="@color/colorPrimaryLight"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_photo"
+        android:icon="@drawable/camera_icon"
+        app:showAsAction="always"
+        android:title="Photo"/>
     <item
         android:id="@+id/action_logout"
         android:title="Logout"

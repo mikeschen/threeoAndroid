@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 //Friday SavedRestaurantListActivity goes into main
 //use activity_scribe.xml for activity
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.fab) FloatingActionButton fab;
     public static final String TAG = MainActivity.class.getSimpleName();
     private Query mQuery;
     private Firebase mFirebaseRef;
@@ -52,31 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         setUpFirebaseQuery();
         setUpRecyclerView();
-
-//        fab.setOnClickListener(this);
-
-//        setContentView(R.layout.activity_post);
-//        mContentListView = (ListView) findViewById(R.id.contentListView);
-
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String post = ((TextView)view).getText().toString();
-//                Toast.makeText(MainActivity.this, post, Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-//        @Override
-//        public void onClick(View view) {
-//            switch (view.getId()) {
-//                case R.id.fab:
-//                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-//                    startActivity(intent);
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
     }
 
     @Override
@@ -96,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 logout();
                 return true;
-            case R.id.action_settings:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -107,10 +79,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
