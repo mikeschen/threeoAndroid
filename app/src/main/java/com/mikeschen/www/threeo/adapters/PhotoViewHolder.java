@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.Photo;
 import com.mikeschen.www.threeo.ui.PhotoDetailActivity;
+import com.mikeschen.www.threeo.ui.ScribeActivity;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -41,6 +43,12 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(mContext, PhotoDetailActivity.class);
                 intent.putExtra("position", itemPosition + "");
                 intent.putExtra("photos", Parcels.wrap(mPhotos));
+
+                if (mContext.getClass().getSimpleName().equals(ScribeActivity.class.getSimpleName())) {
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);
+                } else {
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FIND);
+                }
                 mContext.startActivity(intent);
             }
         });
