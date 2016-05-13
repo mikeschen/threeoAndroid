@@ -11,15 +11,17 @@ import java.util.ArrayList;
 
 public class PhotoPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Photo> mPhotos;
+    private String mSource;
 
-    public PhotoPagerAdapter(FragmentManager fm, ArrayList<Photo> photos) {
+    public PhotoPagerAdapter(FragmentManager fm, ArrayList<Photo> photos, String source) {
         super(fm);
         mPhotos = photos;
+        mSource = source;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return PhotoDetailFragment.newInstance(mPhotos.get(position));
+        return PhotoDetailFragment.newInstance(mPhotos.get(position), mSource);
     }
 
     @Override

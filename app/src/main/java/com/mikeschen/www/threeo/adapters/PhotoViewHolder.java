@@ -43,7 +43,6 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(mContext, PhotoDetailActivity.class);
                 intent.putExtra("position", itemPosition + "");
                 intent.putExtra("photos", Parcels.wrap(mPhotos));
-
                 if (mContext.getClass().getSimpleName().equals(ScribeActivity.class.getSimpleName())) {
                     intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);
                 } else {

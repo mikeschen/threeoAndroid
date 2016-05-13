@@ -31,14 +31,16 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
     @Bind(R.id.photoMainImageView) ImageView mImageLabel;
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.savePostButton) Button mSavePostButton;
+    private String mSource;
 
     private Photo mPhoto;
 
-    public static PhotoDetailFragment newInstance(Photo photo) {
+    public static PhotoDetailFragment newInstance(Photo photo, String source) {
 
         PhotoDetailFragment photoDetailFragment = new PhotoDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("photo", Parcels.wrap(photo));
+        args.putString(Constants.KEY_SOURCE, source);
         photoDetailFragment.setArguments(args);
         return photoDetailFragment;
     }
@@ -51,9 +53,14 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mSource = getArguments().getString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_photo_detail, container, false);
         ButterKnife.bind(this, view);
         mSavePostButton.setOnClickListener(this);
+        if (!mSource.equals(Constants.SOURCE_SAVED)) {
+            mSavePostButton.setVisibility(View.GONE);
+        }
         Picasso.with(view.getContext()).load("https://farm" + mPhoto.getFarm() + ".staticflickr.com/" + mPhoto.getServer() + "/" + mPhoto.getId() + "_" + mPhoto.getSecret() + "_n.jpg").into(mImageLabel);
         mWebsiteLabel.setOnClickListener(this);
         return view;
@@ -72,6 +79,7 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
               Intent intent = new Intent();
               intent.setClass(getActivity(), MainActivity.class);
               getActivity().startActivity(intent);
+              mSavePostButton.setVisibility(View.GONE);
           }
       }
 }
