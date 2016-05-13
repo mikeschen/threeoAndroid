@@ -13,6 +13,7 @@ import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.models.Photo;
 import com.mikeschen.www.threeo.ui.PhotoDetailActivity;
 import com.mikeschen.www.threeo.ui.ScribeActivity;
+import com.mikeschen.www.threeo.util.ItemTouchHelperViewHolder;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PhotoViewHolder extends RecyclerView.ViewHolder {
+public class PhotoViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     private static final int MAX_WIDTH = 125;
     private static final int MAX_HEIGHT = 125;
     @Bind(R.id.photoImageView) ImageView mPhotoImageView;
@@ -61,6 +62,15 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
                 .into(mPhotoImageView);
         mHeadlineDetailTextView.setText(photo.getHeadline());
         mStoryDetailTextView.setText(photo.getStory());
+    }
+
+    @Override
+    public void onItemSelected() {
+        itemView.animate()
+                .alpha(0.7f)
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setDuration(500);
     }
 }
 

@@ -1,12 +1,15 @@
 package com.mikeschen.www.threeo.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,25 +23,29 @@ import com.mikeschen.www.threeo.Constants;
 import com.mikeschen.www.threeo.R;
 import com.mikeschen.www.threeo.adapters.FirebasePostListAdapter;
 import com.mikeschen.www.threeo.models.Photo;
+import com.mikeschen.www.threeo.util.OnStartDragListener;
+import com.mikeschen.www.threeo.util.SimpleItemTouchHelperCallback;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 //Friday SavedRestaurantListActivity goes into main
 //use activity_scribe.xml for activity
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnStartDragListener{
     private Query mQuery;
     private Firebase mFirebaseRef;
     private Firebase mFirebasePostsRef;
     private FirebasePostListAdapter mAdapter;
+    private ItemTouchHelper mItemTouchHelper;
+    private SharedPreferences mSharedPreferences;
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,9 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
 
@@ -100,8 +104,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        mAdapter = new FirebasePostListAdapter(mQuery, Photo.class);
+        mAdapter = new FirebasePostListAdapter(mQuery, Photo.class, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        String uid = mSharedPreferences.getString(Constants.KEY_UID, null);
+//        for (Photo photo : mAdapter.getItems()) {
+//            String pushID = photo.getPushId();
+//            photo.setIndex(Integer.toString(mAdapter.getItems().indexOf(photo)));
+//            mFirebasePostsRef.child(uid)
+//                    .child(pushID)
+//                    .setValue(photo);
+//        }
+//    }
 }

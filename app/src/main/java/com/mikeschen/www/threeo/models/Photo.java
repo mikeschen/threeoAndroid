@@ -17,6 +17,8 @@ public class Photo {
     private String secret;
     private String owner;
     private String title;
+    private String pushId;
+    private String index;
 
     public Photo() {}
 
@@ -29,6 +31,7 @@ public class Photo {
         this.secret = secret;
         this.owner = owner;
         this.title = title;
+        this.index="not_specified";
     }
 
     public String getHeadline() { return headline; }
@@ -46,10 +49,25 @@ public class Photo {
         return secret;
     }
     public String getWebsite() {
-        Log.d("userWeb", "https://www.flickr.com/photos/" + owner);
         return "https://www.flickr.com/photos/" + owner;
     }
     public String getTitle() {
         return title;
     }
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+//    public String getPushId() {
+//        return pushId;
+//    }
+//
+//    public void setPushId(String pushId) {
+//        this.pushId = pushId;
+//    }
+
 }
