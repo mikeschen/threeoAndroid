@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 //Friday SavedRestaurantListActivity goes into main
 //use activity_scribe.xml for activity
 public class MainActivity extends AppCompatActivity {
-    public static final String TAG = MainActivity.class.getSimpleName();
     private Query mQuery;
     private Firebase mFirebaseRef;
     private Firebase mFirebasePostsRef;
