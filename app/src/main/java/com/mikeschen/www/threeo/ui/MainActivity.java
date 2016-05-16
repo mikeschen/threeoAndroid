@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
     }
 
     private void setUpFirebaseQuery() {
-        String location = mFirebasePostsRef.toString();
+        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        String location = mFirebasePostsRef.child(userUid).toString();
         mQuery = new Firebase(location);
     }
 

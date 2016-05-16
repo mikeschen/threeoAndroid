@@ -2,9 +2,11 @@ package com.mikeschen.www.threeo.ui;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class PhotoDetailFragment extends Fragment implements View.OnClickListener {
+    private SharedPreferences mSharedPreferences;
     @Bind(R.id.photoMainImageView) ImageView mImageLabel;
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.savePostButton) Button mSavePostButton;
@@ -57,6 +60,7 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPhoto = Parcels.unwrap(getArguments().getParcelable("photo"));
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
 //    @Override
@@ -130,8 +134,13 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
             startActivity(webIntent);
           }
           if(v == mSavePostButton) {
-              Firebase ref = new Firebase(Constants.FIREBASE_URL_POSTS);
-              ref.push().setValue(mPhoto);
+              String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+              Firebase ref = new Firebase(Constants.FIREBASE_URL_POSTS).child(userUid);
+              Firebase pushRef = ref.push();
+              String postPushId = pushRef.getKey();
+              pushRef.setValue(mPhoto);
+              mPhoto.setPushId(postPushId);
+
               Toast.makeText(getContext(), "Post Saved", Toast.LENGTH_SHORT).show();
               Intent intent = new Intent();
               intent.setClass(getActivity(), MainActivity.class);

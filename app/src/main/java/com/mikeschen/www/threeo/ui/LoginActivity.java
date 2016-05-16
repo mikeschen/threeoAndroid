@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
                 if (authData != null) {
                     String userUid = authData.getUid();
-
+                    mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
                     String userInfo = authData.toString();
 
                     mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();

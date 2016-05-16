@@ -62,12 +62,12 @@ public class Photo {
         this.index = index;
     }
 
-//    public String getPushId() {
-//        return pushId;
-//    }
-//
-//    public void setPushId(String pushId) {
-//        this.pushId = pushId;
-//    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 
 }
