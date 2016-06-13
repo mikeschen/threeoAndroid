@@ -63,54 +63,6 @@ public class PhotoDetailFragment extends Fragment implements View.OnClickListene
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        menu.clear();
-//        inflater.inflate(R.menu.menu_photo, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.action_photo:
-//                onLaunchCamera();
-//            default:
-//                break;
-//        }
-//        return false;
-//    }
-
-//    public void onLaunchCamera() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            mImageLabel.setImageBitmap(imageBitmap);
-//            encodeBitmapAndSaveToFirebase(imageBitmap);
-//        }
-//    }
-//
-//    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        byte[] b = baos.toByteArray();
-//        String imageEncoded = com.firebase.client.utilities.Base64.encodeBytes(b);
-//        Firebase photoRef = new Firebase(Constants.FIREBASE_URL_POSTS)
-//                .child(mUid)
-//                .child(mPhoto.getPushId())
-//                .child("imageUrl");
-//        photoRef.setValue(imageEncoded);
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mSource = getArguments().getString(Constants.KEY_SOURCE);
